@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-cluster-ip-service
+spec:
+  type: ClusterIP
+  selector:
+    component: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
+# PVC - Persistent Volume Claim
+# What is "volume" in the kubernetes world
+# - it is an object (data storage INSIDE the pod) that allows a container to store data at the POD LEVEL
+# When a container is created inside of a pod any data is written in the filesystem inside of thi scontainer.
+# If container crashes all the data is lost. BAD.
+# Volume is tied to the POD. So data is written not in the filysystem of a container, but outside of it. Thus, if a container crashes, data is kept. But if POD dies, data is lost too.
+
+# What is "Persistent Volume"
+# persistent volume is NOT tied to a pod, it is outside of a pod.
+
+# What is "Persistent Volume Claim"
+# It is like a list of available persistent volumes (can be compared with an advertisement)
